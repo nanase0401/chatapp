@@ -24,8 +24,8 @@ def index(request):
 def signup(request):
     if request.method == "GET":
         form = SignUpForm()
-   
-
+    elif request.method == "POST":
+        form = SignUpForm(request.POST)
         if form.is_valid():
             # モデルフォームは form の値を models にそのまま格納できる
             # save() メソッドがあるので便利
