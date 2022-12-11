@@ -93,6 +93,13 @@ def talk_room(request, user_id):
     elif request.method == "POST":
         # 送信内容を取得
         form = TalkForm(request.POST)
+        new_talk = form.save(commit=False)
+        # 送信者、受信者、メッセージを与えて保存
+        new_talk.sender = request.user
+        new_talk.receiver = friend
+        new_talk.save()
+        return redirect("talk_room", user_id)
+
 
     context= {
         "form": form,
